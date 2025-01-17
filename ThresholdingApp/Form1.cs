@@ -75,7 +75,8 @@ namespace ThresholdingApp
                     Marshal.Copy(sourceData.Scan0, sourceBuffer, 0, bytes);
 
                     int alignedBytes = (bytes + 15) & ~15; // byte alignment to nearest multiple of 16 (optimization)
-                                                           // memory allocation for source and result pointers
+                    
+                    // memory allocation for source and result pointers
                     IntPtr sourcePointer = Marshal.AllocHGlobal(alignedBytes);
                     IntPtr resultPointer = Marshal.AllocHGlobal(alignedBytes);
 
@@ -99,7 +100,9 @@ namespace ThresholdingApp
                             {
                                 tasks[i] = Task.Run(() =>
                                 {
-                                    MessageBox.Show($"{startRow} - {endRow} - {stride}");
+                                    MessageBox.Show($"{stride} - {startRow} - {endRow} - {resultPointer} - {width}");
+                                    
+                                    
                                     MessageBox.Show(ConvertToGrayScale(sourcePointer, resultPointer, width, height, stride, startRow, endRow).ToString());
                                 });
                             }
