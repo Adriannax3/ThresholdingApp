@@ -1,4 +1,4 @@
-LIBRARY ThresholdingAsmLib
+LIBRARY ThresholdingASM
 EXPORTS
 ConvertToGrayScale
 Thresholding

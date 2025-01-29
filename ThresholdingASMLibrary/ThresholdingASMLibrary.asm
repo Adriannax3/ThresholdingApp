@@ -22,7 +22,6 @@ ConvertToGrayScale proc
 	push r14
 	push r15
 
-
 	; Assigning parameters to constants
 	mov RSI, RCX						; SourcePointer -> RSI
 	mov RDI, RDX						; ResultPointer -> RDI
@@ -64,13 +63,13 @@ inner_loop:
 
 	; Calculated from the formula
 
-	movss xmm3, dword ptr [RED]			; xmm3 = 0.299
+	movss xmm3, dword ptr [BLUE]			; xmm3 = 0.299
 	mulss xmm0, xmm3					; xmm0 = xmm0 * xmm3
 
 	movss xmm3, dword ptr [GREEN]		; xmm3 = 0.587
 	mulss xmm1, xmm3					; xmm1 = xmm1 * xmm3
 
-	movss xmm3, dword ptr [BLUE]		; xmm3 = 0.114
+	movss xmm3, dword ptr [RED]			; xmm3 = 0.114
 	mulss xmm2, xmm3					; xmm2 = xmm2 * xmm3
 
 	; Sum of results
@@ -166,13 +165,13 @@ inner_loop:
 
 	; Calculated from the formula
 
-	movss xmm3, dword ptr [RED]				; xmm3 = 0.299
+	movss xmm3, dword ptr [BLUE]				; xmm3 = 0.299
 	mulss xmm0, xmm3						; xmm0 = xmm0 * xmm3
 
 	movss xmm3, dword ptr [GREEN]			; xmm3 = 0.587
 	mulss xmm1, xmm3						; xmm1 = xmm1 * xmm3
 
-	movss xmm3, dword ptr [BLUE]			; xmm3 = 0.114
+	movss xmm3, dword ptr [RED]			; xmm3 = 0.114
 	mulss xmm2, xmm3						; xmm2 = xmm2 * xmm3
 		
 	; Sum of results
@@ -185,7 +184,7 @@ inner_loop:
 
 	; Comparison with the threshold
 	cmp r8d, edx
-	jl less
+	jle less
 	mov r8b,255
 	jmp end_compare
 
@@ -267,7 +266,7 @@ inner_loop:
 
 	; Comparison with the threshold
 	cmp r8d, edx
-	jl less
+	jle less
 	mov r8b,255
 	jmp end_compare
 

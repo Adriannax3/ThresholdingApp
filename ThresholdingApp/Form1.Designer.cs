@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             btn_addFile = new Button();
             openFileDialog1 = new OpenFileDialog();
             pictureBox_before = new PictureBox();
@@ -38,18 +37,27 @@
             btnDownload = new Button();
             txtInfo = new Label();
             panel_thresholding = new Panel();
+            btnThresholding = new Button();
             richTextBox_Info = new RichTextBox();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             panel_settings = new Panel();
+            label4 = new Label();
+            comboBox1 = new ComboBox();
+            thresholdValueTxt = new Label();
+            label3 = new Label();
+            checkBox1 = new CheckBox();
+            label1 = new Label();
+            trackBar1 = new TrackBar();
             radioASMLib = new RadioButton();
             radioCLib = new RadioButton();
             label2 = new Label();
             btn_thresholding = new Button();
             btn_settings = new Button();
+            saveFileDialog1 = new SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)pictureBox_before).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox_after).BeginInit();
             panel_thresholding.SuspendLayout();
             panel_settings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // btn_addFile
@@ -78,7 +86,7 @@
             // 
             pictureBox_before.BorderStyle = BorderStyle.FixedSingle;
             pictureBox_before.Image = Properties.Resources.undraw_images;
-            pictureBox_before.Location = new Point(236, 90);
+            pictureBox_before.Location = new Point(235, 90);
             pictureBox_before.Name = "pictureBox_before";
             pictureBox_before.Size = new Size(300, 250);
             pictureBox_before.SizeMode = PictureBoxSizeMode.Zoom;
@@ -125,13 +133,14 @@
             btnDownload.FlatStyle = FlatStyle.Flat;
             btnDownload.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btnDownload.ForeColor = Color.White;
-            btnDownload.Location = new Point(609, 357);
+            btnDownload.Location = new Point(605, 357);
             btnDownload.Margin = new Padding(2);
             btnDownload.Name = "btnDownload";
             btnDownload.Size = new Size(200, 40);
             btnDownload.TabIndex = 5;
             btnDownload.Text = "Download";
             btnDownload.UseVisualStyleBackColor = false;
+            btnDownload.Click += btnDownload_Click;
             // 
             // txtInfo
             // 
@@ -139,12 +148,13 @@
             txtInfo.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
             txtInfo.Location = new Point(2, 63);
             txtInfo.Name = "txtInfo";
-            txtInfo.Size = new Size(192, 17);
+            txtInfo.Size = new Size(200, 17);
             txtInfo.TabIndex = 6;
-            txtInfo.Text = "Information about file:";
+            txtInfo.Text = "Informations about file:";
             // 
             // panel_thresholding
             // 
+            panel_thresholding.Controls.Add(btnThresholding);
             panel_thresholding.Controls.Add(richTextBox_Info);
             panel_thresholding.Controls.Add(btn_addFile);
             panel_thresholding.Controls.Add(pictureBox_before);
@@ -157,6 +167,24 @@
             panel_thresholding.Name = "panel_thresholding";
             panel_thresholding.Size = new Size(858, 418);
             panel_thresholding.TabIndex = 8;
+            // 
+            // btnThresholding
+            // 
+            btnThresholding.BackColor = Color.Black;
+            btnThresholding.Cursor = Cursors.Hand;
+            btnThresholding.FlatAppearance.BorderColor = Color.Black;
+            btnThresholding.FlatAppearance.BorderSize = 0;
+            btnThresholding.FlatStyle = FlatStyle.Flat;
+            btnThresholding.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnThresholding.ForeColor = Color.White;
+            btnThresholding.Location = new Point(285, 357);
+            btnThresholding.Margin = new Padding(2);
+            btnThresholding.Name = "btnThresholding";
+            btnThresholding.Size = new Size(200, 40);
+            btnThresholding.TabIndex = 8;
+            btnThresholding.Text = "Thresholding";
+            btnThresholding.UseVisualStyleBackColor = false;
+            btnThresholding.Click += btnThresholding_Click;
             // 
             // richTextBox_Info
             // 
@@ -171,27 +199,102 @@
             richTextBox_Info.TabIndex = 7;
             richTextBox_Info.Text = "Select file to see informations...";
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
-            // 
             // panel_settings
             // 
+            panel_settings.AllowDrop = true;
+            panel_settings.Controls.Add(label4);
+            panel_settings.Controls.Add(comboBox1);
+            panel_settings.Controls.Add(thresholdValueTxt);
+            panel_settings.Controls.Add(label3);
+            panel_settings.Controls.Add(checkBox1);
+            panel_settings.Controls.Add(label1);
+            panel_settings.Controls.Add(trackBar1);
             panel_settings.Controls.Add(radioASMLib);
             panel_settings.Controls.Add(radioCLib);
             panel_settings.Controls.Add(label2);
-            panel_settings.Location = new Point(444, 70);
+            panel_settings.Location = new Point(12, 70);
             panel_settings.Name = "panel_settings";
-            panel_settings.Size = new Size(426, 418);
+            panel_settings.Size = new Size(858, 418);
             panel_settings.TabIndex = 10;
             panel_settings.Visible = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(407, 254);
+            label4.Name = "label4";
+            label4.Size = new Size(64, 17);
+            label4.TabIndex = 13;
+            label4.Text = "Threads";
+            // 
+            // comboBox1
+            // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "1", "2", "4", "8", "16", "32", "64" });
+            comboBox1.Location = new Point(379, 283);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 12;
+            // 
+            // thresholdValueTxt
+            // 
+            thresholdValueTxt.AutoSize = true;
+            thresholdValueTxt.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            thresholdValueTxt.Location = new Point(397, 193);
+            thresholdValueTxt.Name = "thresholdValueTxt";
+            thresholdValueTxt.Size = new Size(88, 17);
+            thresholdValueTxt.TabIndex = 11;
+            thresholdValueTxt.Text = "Value: 128";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(400, 125);
+            label3.Name = "label3";
+            label3.Size = new Size(80, 17);
+            label3.TabIndex = 10;
+            label3.Text = "Threshold";
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(351, 220);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(184, 19);
+            checkBox1.TabIndex = 9;
+            checkBox1.Text = "select threshold automatically";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(407, 66);
+            label1.Name = "label1";
+            label1.Size = new Size(64, 17);
+            label1.TabIndex = 8;
+            label1.Text = "Library";
+            label1.Click += label1_Click;
+            // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(351, 156);
+            trackBar1.Maximum = 255;
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(184, 45);
+            trackBar1.TabIndex = 7;
+            trackBar1.Value = 128;
+            trackBar1.Scroll += trackBar1_Scroll;
             // 
             // radioASMLib
             // 
             radioASMLib.AutoSize = true;
             radioASMLib.Checked = true;
-            radioASMLib.Location = new Point(206, 83);
+            radioASMLib.Location = new Point(434, 86);
             radioASMLib.Name = "radioASMLib";
             radioASMLib.Size = new Size(50, 19);
             radioASMLib.TabIndex = 6;
@@ -202,7 +305,7 @@
             // radioCLib
             // 
             radioCLib.AutoSize = true;
-            radioCLib.Location = new Point(151, 83);
+            radioCLib.Location = new Point(379, 86);
             radioCLib.Name = "radioCLib";
             radioCLib.Size = new Size(40, 19);
             radioCLib.TabIndex = 5;
@@ -213,10 +316,10 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(163, 25);
+            label2.Font = new Font("Consolas", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(399, 16);
             label2.Name = "label2";
-            label2.Size = new Size(72, 17);
+            label2.Size = new Size(81, 19);
             label2.TabIndex = 4;
             label2.Text = "Settings";
             // 
@@ -225,7 +328,7 @@
             btn_thresholding.BackColor = Color.Black;
             btn_thresholding.Cursor = Cursors.Hand;
             btn_thresholding.FlatAppearance.BorderColor = Color.Black;
-            btn_thresholding.FlatAppearance.BorderSize = 0;
+            btn_thresholding.FlatAppearance.BorderSize = 2;
             btn_thresholding.FlatStyle = FlatStyle.Flat;
             btn_thresholding.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btn_thresholding.ForeColor = Color.White;
@@ -234,7 +337,7 @@
             btn_thresholding.Name = "btn_thresholding";
             btn_thresholding.Size = new Size(200, 40);
             btn_thresholding.TabIndex = 11;
-            btn_thresholding.Text = "Thresholding";
+            btn_thresholding.Text = "Program";
             btn_thresholding.UseVisualStyleBackColor = false;
             btn_thresholding.Click += btn_thresholding_Click;
             // 
@@ -243,7 +346,7 @@
             btn_settings.BackColor = Color.Black;
             btn_settings.Cursor = Cursors.Hand;
             btn_settings.FlatAppearance.BorderColor = Color.Black;
-            btn_settings.FlatAppearance.BorderSize = 0;
+            btn_settings.FlatAppearance.BorderSize = 2;
             btn_settings.FlatStyle = FlatStyle.Flat;
             btn_settings.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
             btn_settings.ForeColor = Color.White;
@@ -252,7 +355,7 @@
             btn_settings.Name = "btn_settings";
             btn_settings.Size = new Size(200, 40);
             btn_settings.TabIndex = 12;
-            btn_settings.Text = "Settings && Info";
+            btn_settings.Text = "Settings";
             btn_settings.UseVisualStyleBackColor = false;
             btn_settings.Click += btn_settings_Click;
             // 
@@ -261,7 +364,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(884, 501);
+            ClientSize = new Size(884, 511);
             Controls.Add(btn_settings);
             Controls.Add(btn_thresholding);
             Controls.Add(panel_settings);
@@ -275,6 +378,7 @@
             panel_thresholding.PerformLayout();
             panel_settings.ResumeLayout(false);
             panel_settings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
         }
 
@@ -290,12 +394,20 @@
         private Label txtInfo;
         private Panel panel_thresholding;
         private RichTextBox richTextBox_Info;
-        private ContextMenuStrip contextMenuStrip1;
         private Panel panel_settings;
         private Button btn_thresholding;
         private Button btn_settings;
         private RadioButton radioASMLib;
         private RadioButton radioCLib;
         private Label label2;
+        private Label label1;
+        private TrackBar trackBar1;
+        private Label label3;
+        private CheckBox checkBox1;
+        private Label thresholdValueTxt;
+        private Button btnThresholding;
+        private SaveFileDialog saveFileDialog1;
+        private ComboBox comboBox1;
+        private Label label4;
     }
 }
