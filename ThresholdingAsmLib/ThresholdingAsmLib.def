@@ -1,5 +1,0 @@
-LIBRARY ThresholdingAsmLib
-EXPORTS
-ConvertToGrayScale
-Thresholding
-ThresholdingOnly
