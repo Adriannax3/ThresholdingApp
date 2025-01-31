@@ -1,5 +1,0 @@
-LIBRARY ThresholdingASM
-EXPORTS
-ConvertToGrayScale
-Thresholding
-ThresholdingOnly
