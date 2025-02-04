@@ -325,13 +325,13 @@
             // 
             // btn_thresholding
             // 
-            btn_thresholding.BackColor = Color.Black;
+            btn_thresholding.BackColor = Color.White;
             btn_thresholding.Cursor = Cursors.Hand;
             btn_thresholding.FlatAppearance.BorderColor = Color.Black;
             btn_thresholding.FlatAppearance.BorderSize = 2;
             btn_thresholding.FlatStyle = FlatStyle.Flat;
             btn_thresholding.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btn_thresholding.ForeColor = Color.White;
+            btn_thresholding.ForeColor = Color.Black;
             btn_thresholding.Location = new Point(14, 11);
             btn_thresholding.Margin = new Padding(2);
             btn_thresholding.Name = "btn_thresholding";

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ThresholdingApp": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

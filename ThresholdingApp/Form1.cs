@@ -121,11 +121,12 @@ namespace ThresholdingApp
                     Marshal.Copy(sourceBuffer, 0, sourcePointer, bytes);
                     Marshal.Copy(sourceBuffer, 0, resultPointer, bytes);
 
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+
                     int rowsPerThread = height / numberOfThreads;
                     Task[] tasks = new Task[numberOfThreads];
 
-                    Stopwatch stopwatch = new Stopwatch();
-                    stopwatch.Start();
 
                     for (int i = 0; i < numberOfThreads; i++)
                     {
@@ -136,7 +137,6 @@ namespace ThresholdingApp
                         {
                             tasks[i] = Task.Run(() =>
                             {
-                                //MessageBox.Show($"{stride} - {startRow} - {endRow} - {resultPointer} - {width}");
                                 Thresholding(sourcePointer, resultPointer, width, thresholdValue, stride, startRow, endRow);
                             });
                         }
@@ -311,7 +311,6 @@ namespace ThresholdingApp
                         MessageBox.Show($"Thread error: {ex.InnerExceptions.FirstOrDefault()?.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    //histogram i obliczanie progu
                     Marshal.Copy(histogramPointer, histogramBuffer, 0, 256);
                     thresholdValue = OtsuMethod(histogramBuffer);
 
@@ -593,15 +592,15 @@ namespace ThresholdingApp
                 {
                     try
                     {
-                        // Zapisujemy obraz do wybranego pliku
+                        // Save the result
                         resultImage.Save(saveFileDialog1.FileName);
 
-                        // Informujemy u¿ytkownika o powodzeniu
+                        // MessageBox
                         MessageBox.Show("Obraz zosta³ pobrany!");
                     }
                     catch (Exception ex)
                     {
-                        // W razie b³êdu wyœwietlamy komunikat
+                        // MessageBox
                         MessageBox.Show("Wyst¹pi³ b³¹d podczas zapisywania obrazu: " + ex.Message);
                     }
                 }
